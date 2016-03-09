@@ -884,7 +884,8 @@ print.carx <- function(x,...)
 		print(x$CI)
 		cat("\nVariance-covariance matrix:\n")
 		print(x$vcov)
-    cat(paste0("N.B.: Confidence intervals and variance-covariance matrix are based on ", x$b, " bootstrap samples.\n"))
+    cat("N.B.: Confidence intervals and variance-covariance matrix\n")
+    cat(paste0("are based on ", x$b, " bootstrap samples.\n"))
 	}
 }
 
@@ -915,12 +916,11 @@ summary.carx <- function(object,...)
 		se <- sqrt(diag(object$vcov))
 		tVal <- c(coef(object),object$sigma)/se
 
-		est <- coef(object)
-		tab <- cbind(Estimate = est,
-			     StdErr =  se[1:(object$npar-1)],
-			     lowerCI = object$CI[1:(object$npar-1),1],
-			     upperCI = object$CI[1:(object$npar-1),2],
-           p.value = object$pVal[1:(object$npar-1)]
+		tab <- cbind(Estimate = object$prmtrEstd,
+			     StdErr =  se[1:(object$npar)],
+			     lowerCI = object$CI[1:(object$npar),1],
+			     upperCI = object$CI[1:(object$npar),2],
+           p.value = object$pVal[1:(object$npar)]
 			     )
 	}
 	res <- list(call=object$call,
